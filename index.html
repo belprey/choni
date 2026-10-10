@@ -23,7 +23,7 @@
   --cream-2:rgba(237,228,211,.55);
   --line:rgba(212,175,55,.2);
   --line-soft:rgba(212,175,55,.1);
-  --nav-h:62px;
+  --nav-h:72px;
   --ease:cubic-bezier(.22,.61,.36,1);
   --sans:'Inter',system-ui,-apple-system,sans-serif;
   --serif:'Cormorant Garamond',Georgia,serif;
@@ -45,7 +45,7 @@ img{display:block;max-width:100%}
 /* ---------- TOPBAR ---------- */
 .topbar{
   position:absolute;top:0;left:0;right:0;z-index:30;
-  padding:calc(env(safe-area-inset-top) + 16px) 20px 16px;
+  padding:calc(env(safe-area-inset-top) + 16px) 18px 16px;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
   background:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,0));
   pointer-events:none;
@@ -54,27 +54,33 @@ img{display:block;max-width:100%}
 .topbar > *{pointer-events:auto}
 .brand{
   display:flex;align-items:baseline;gap:6px;
-  font-family:var(--engrave);font-weight:500;
-  font-size:20px;letter-spacing:.32em;
-  color:var(--gold);
-  text-shadow:0 0 22px rgba(212,175,55,.35);
+  font-family:var(--engrave);font-weight:600;
+  font-size:22px;letter-spacing:.32em;
+  background:linear-gradient(180deg,#FFF6D4 0%,var(--gold-lt) 25%,var(--gold) 55%,var(--gold-dk) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(255,246,212,.25)) drop-shadow(0 0 14px rgba(212,175,55,.45));
   position:relative;
 }
 .brand .spark{
-  width:11px;height:11px;
+  width:12px;height:12px;
   margin-left:-2px;transform:translateY(2px);
   fill:var(--gold-lt);
-  filter:drop-shadow(0 0 5px rgba(245,228,168,.7));
+  filter:drop-shadow(0 0 5px rgba(245,228,168,.8));
 }
 .brand small{
   font-family:var(--engrave);font-size:9.5px;letter-spacing:.3em;
-  color:var(--gold);opacity:.75;
-  transform:translateY(-4px);
+  color:var(--gold);opacity:.8;
+  transform:translateY(-5px);
+  -webkit-text-fill-color:var(--gold);
+}
+.topbar-right{
+  display:flex;align-items:center;gap:10px;
 }
 .drop-pill{
-  display:flex;align-items:center;gap:8px;
-  padding:7px 13px;border:1px solid var(--line);border-radius:100px;
-  font-family:var(--engrave);font-size:9.5px;letter-spacing:.22em;
+  display:flex;align-items:center;gap:7px;
+  padding:7px 12px;border:1px solid var(--line);border-radius:100px;
+  font-family:var(--engrave);font-size:9px;letter-spacing:.2em;
   text-transform:uppercase;color:var(--cream);
   background:rgba(0,0,0,.55);backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);white-space:nowrap;
@@ -85,6 +91,22 @@ img{display:block;max-width:100%}
   animation:pulseDot 1.8s infinite;
 }
 @keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+
+.burger{
+  width:40px;height:40px;
+  display:grid;place-items:center;
+  border-radius:50%;
+  background:rgba(0,0,0,.55);
+  border:1px solid var(--line-soft);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  transition:transform .2s var(--ease),border-color .2s;
+}
+.burger:active{transform:scale(.92)}
+.burger svg{
+  width:20px;height:20px;stroke:var(--gold);
+  stroke-width:1.8;fill:none;stroke-linecap:round;
+}
 
 /* ---------- FEED ---------- */
 .feed{
@@ -160,7 +182,6 @@ img{display:block;max-width:100%}
 }
 .hotspot.is-seen::before{display:none}
 
-/* Cuando la pieza está zoomeada, los hotspots ajenos se ocultan */
 .piece.is-zoomed .hotspot{opacity:0;pointer-events:none}
 .piece.is-zoomed .hotspot.is-active{
   opacity:1;pointer-events:auto;
@@ -267,31 +288,274 @@ img{display:block;max-width:100%}
   transition:opacity .5s var(--ease);
 }
 .nav-btn{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-  font-family:var(--engrave);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(237,228,211,.35);transition:color .25s var(--ease);position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  font-family:var(--engrave);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(237,228,211,.4);transition:color .25s var(--ease);position:relative;
 }
-.nav-btn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.4;
-  stroke-linecap:round;stroke-linejoin:round}
+.nav-btn svg{
+  width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .25s var(--ease);
+}
 .nav-btn.is-active{color:var(--gold)}
-.nav-btn.is-active svg{filter:drop-shadow(0 0 6px rgba(212,175,55,.4))}
+.nav-btn.is-active svg{
+  filter:drop-shadow(0 0 8px rgba(212,175,55,.5));
+  transform:translateY(-1px);
+}
 .nav-btn .badge{
-  position:absolute;top:8px;left:calc(50% + 7px);
-  min-width:15px;height:15px;padding:0 4px;border-radius:8px;
+  position:absolute;top:6px;left:calc(50% + 11px);
+  min-width:16px;height:16px;padding:0 4px;border-radius:8px;
   background:var(--gold);color:#000;
-  font-family:var(--sans);font-size:9px;font-weight:700;letter-spacing:0;
+  font-family:var(--sans);font-size:9.5px;font-weight:700;letter-spacing:0;
   display:grid;place-items:center;
   transform:scale(0);transition:transform .3s var(--ease);
-  box-shadow:0 0 12px rgba(212,175,55,.5);
+  box-shadow:0 0 12px rgba(212,175,55,.6);
 }
 .nav-btn .badge.is-on{transform:scale(1)}
 
-/* ---------- KIOSK / MODO VIDRIERA ---------- */
+/* ---------- KIOSK ---------- */
 body.kiosk .nav{opacity:.12}
 body.kiosk .topbar{opacity:0;pointer-events:none}
 body.kiosk.wake .nav{opacity:1}
 body.kiosk.wake .topbar{opacity:1;pointer-events:auto}
 body.kiosk .piece-hint{display:none}
+
+/* ---------- DRAWER ---------- */
+.drawer-backdrop{
+  position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.7);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:opacity .34s var(--ease);
+}
+.drawer-backdrop.is-open{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:80;
+  width:min(88vw,380px);
+  background:linear-gradient(180deg,#14110C 0%,#08070A 100%);
+  border-left:1px solid var(--line);
+  transform:translateX(102%);
+  transition:transform .42s var(--ease);
+  display:flex;flex-direction:column;
+  box-shadow:-20px 0 70px rgba(0,0,0,.7);
+}
+.drawer.is-open{transform:translateX(0)}
+.drawer-head{
+  padding:calc(env(safe-area-inset-top) + 22px) 24px 20px;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  border-bottom:1px solid var(--line-soft);
+}
+.drawer-title{
+  font-family:var(--engrave);font-size:22px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;
+  background:linear-gradient(180deg,#FFF6D4,var(--gold-lt) 30%,var(--gold) 70%,var(--gold-dk));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 0 14px rgba(212,175,55,.3));
+  margin-bottom:6px;
+}
+.drawer-sub{
+  font-family:var(--serif);font-style:italic;
+  font-size:13.5px;color:var(--cream-2);
+  letter-spacing:.01em;
+}
+.drawer-close{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid var(--line-soft);
+  display:grid;place-items:center;
+  color:var(--gold);font-size:20px;line-height:1;
+  transition:background .2s;
+}
+.drawer-close:active{background:rgba(212,175,55,.1)}
+.drawer-body{
+  flex:1;overflow-y:auto;
+  padding:22px 24px calc(28px + env(safe-area-inset-bottom));
+  -webkit-overflow-scrolling:touch;
+}
+
+/* Firma */
+.drawer-footer{
+  margin-top:36px;
+  padding-top:22px;
+  border-top:1px solid var(--line-soft);
+  text-align:center;
+}
+.drawer-footer p{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:13.5px;
+  color:rgba(237,228,211,.55);
+  letter-spacing:.02em;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.drawer-footer .heart{
+  width:12px;height:12px;
+  fill:var(--gold);
+  filter:drop-shadow(0 0 6px rgba(212,175,55,.6));
+  animation:heartPulse 2.4s var(--ease) infinite;
+  transform-origin:center;
+}
+@keyframes heartPulse{
+  0%,100%{transform:scale(1);opacity:.9}
+  50%{transform:scale(1.18);opacity:1}
+}
+
+/* ---------- LOOKS (editorial) ---------- */
+.looks-list{display:flex;flex-direction:column;gap:26px}
+
+.look{
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  background:#0A0908;
+  border:1px solid var(--line-soft);
+  cursor:pointer;
+  transition:transform .2s var(--ease);
+}
+.look:active{transform:scale(.985)}
+
+/* Hero: foto grande con overlay */
+.look--hero{aspect-ratio:3/4}
+.look--hero .look-media{position:absolute;inset:0;background:#0A0908}
+.look--hero .look-media img{width:100%;height:100%;object-fit:cover;opacity:.94}
+.look--hero .look-media::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.96) 0%,rgba(0,0,0,.45) 45%,rgba(0,0,0,0) 78%);
+}
+.look--hero .look-body{
+  position:absolute;left:24px;right:24px;bottom:24px;
+  z-index:2;
+}
+
+/* Editorial: foto arriba, texto abajo */
+.look--editorial .look-media{
+  position:relative;aspect-ratio:4/5;background:#0A0908;
+}
+.look--editorial .look-media img{width:100%;height:100%;object-fit:cover;opacity:.92}
+.look--editorial .look-body{
+  padding:24px;
+  border-top:1px solid var(--line-soft);
+}
+
+/* Placeholder cuando falta la foto */
+.look-media.is-empty{
+  background:
+    linear-gradient(135deg,rgba(212,175,55,.08),transparent 60%),
+    radial-gradient(60% 60% at 50% 40%,rgba(212,175,55,.14),transparent 70%),
+    #0A0908;
+  display:grid;place-items:center;
+  position:relative;
+}
+.look-media.is-empty::before{
+  content:"Aún sin foto";
+  font-family:var(--engrave);font-size:9px;letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(212,175,55,.5);
+}
+
+/* Número de look */
+.look-num{
+  position:absolute;top:16px;left:16px;
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(0,0,0,.7);
+  border:1px solid var(--line);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  display:grid;place-items:center;
+  font-family:var(--engrave);font-size:12px;
+  color:var(--gold);letter-spacing:.05em;
+  z-index:3;
+}
+
+/* Texto */
+.look-tag{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--engrave);font-size:9px;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:10px;
+}
+.look-tag::before{content:"";width:14px;height:1px;background:var(--gold);opacity:.7}
+
+.look-title{
+  font-family:var(--serif);font-size:26px;line-height:1.1;
+  font-weight:400;letter-spacing:-.01em;
+  color:#FBF7EE;margin-bottom:8px;
+}
+.look-note{
+  font-family:var(--serif);font-style:italic;
+  font-size:14.5px;line-height:1.5;
+  color:rgba(237,228,211,.72);
+  margin-bottom:16px;
+}
+.look-cta{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--engrave);font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);
+  padding:10px 17px;border:1px solid var(--line);border-radius:100px;
+  transition:background .2s;
+}
+.look-cta::after{
+  content:"→";font-family:var(--sans);font-size:14px;letter-spacing:0;
+  transform:translateY(-1px);
+}
+
+/* ---------- LOOK SHEET ---------- */
+.look-hero-img{
+  aspect-ratio:4/5;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid var(--line-soft);
+  background:#0A0908;
+  margin-bottom:22px;
+  position:relative;
+}
+.look-hero-img img{width:100%;height:100%;object-fit:cover}
+.look-hero-img.is-empty{
+  background:
+    linear-gradient(135deg,rgba(212,175,55,.08),transparent 60%),
+    #0A0908;
+  display:grid;place-items:center;
+}
+.look-hero-img.is-empty::before{
+  content:"Aún sin foto";
+  font-family:var(--engrave);font-size:9px;letter-spacing:.3em;
+  text-transform:uppercase;color:rgba(212,175,55,.5);
+}
+.look-pieces-label{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--engrave);font-size:9px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--gold);opacity:.9;
+  margin-bottom:14px;
+}
+.look-pieces-label::after{
+  content:"";flex:1;height:1px;
+  background:linear-gradient(90deg,var(--line),transparent);
+}
+.look-pieces{
+  display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;
+  margin:0 -24px 8px;padding-left:24px;padding-right:24px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.look-pieces::-webkit-scrollbar{display:none}
+.look-piece{
+  flex-shrink:0;width:132px;
+  border-radius:12px;overflow:hidden;
+  background:#0A0908;
+  border:1px solid var(--line-soft);
+  cursor:pointer;
+  transition:transform .2s var(--ease);
+}
+.look-piece:active{transform:scale(.96)}
+.look-piece img{width:100%;aspect-ratio:1;object-fit:cover;opacity:.9}
+.look-piece-info{padding:11px 11px 13px}
+.look-piece-info h5{
+  font-family:var(--serif);font-size:14.5px;font-weight:400;
+  color:#FBF7EE;margin-bottom:3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.look-piece-info p{
+  font-family:var(--engrave);font-size:9px;letter-spacing:.1em;
+  color:var(--gold);
+}
 
 /* ---------- SHEET ---------- */
 .backdrop{
@@ -419,8 +683,11 @@ body.kiosk .piece-hint{display:none}
 .panel-title{
   font-family:var(--engrave);font-size:26px;font-weight:500;
   letter-spacing:.14em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:10px;
-  text-shadow:0 0 24px rgba(212,175,55,.25);
+  background:linear-gradient(180deg,#FFF6D4,var(--gold-lt) 30%,var(--gold) 70%,var(--gold-dk));
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 0 18px rgba(212,175,55,.25));
+  margin-bottom:10px;
 }
 .panel-sub{
   font-family:var(--serif);font-style:italic;
@@ -484,7 +751,6 @@ body.kiosk .piece-hint{display:none}
   display:block;margin-top:5px;
   font-family:var(--sans);font-size:10px;letter-spacing:.04em;
   color:rgba(237,228,211,.45);
-  font-family:var(--sans);
   font-style:normal;
 }
 .cat-card-info p.cat-card-agotado{color:rgba(237,228,211,.35)}
@@ -567,9 +833,9 @@ body.kiosk .piece-hint{display:none}
 /* Cuenta rows */
 .row{
   display:flex;align-items:center;justify-content:space-between;
-  padding:18px 0;border-bottom:1px solid var(--line-soft);
+  padding:16px 0;border-bottom:1px solid var(--line-soft);
 }
-.row-label{font-size:13.5px;color:rgba(237,228,211,.85)}
+.row-label{font-size:13px;color:rgba(237,228,211,.85)}
 .row-value{
   font-family:var(--engrave);font-size:13px;color:var(--gold);
   letter-spacing:.08em;
@@ -612,14 +878,14 @@ body.kiosk .piece-hint{display:none}
 .toast.is-on{opacity:1;transform:translate(-50%,0)}
 
 .install{
-  display:none;align-items:center;gap:14px;margin-bottom:24px;
+  display:none;align-items:center;gap:14px;margin-bottom:22px;
   padding:16px 18px;border-radius:14px;
   background:rgba(212,175,55,.06);
   border:1px solid rgba(212,175,55,.28);
 }
 .install.is-on{display:flex}
 .install p{
-  font-family:var(--serif);font-size:14.5px;line-height:1.45;
+  font-family:var(--serif);font-size:14px;line-height:1.45;
   flex:1;color:rgba(237,228,211,.88);font-style:italic;
 }
 .install button{
@@ -642,11 +908,29 @@ body.kiosk .piece-hint{display:none}
         <svg class="spark" viewBox="0 0 24 24"><path d="M12 0 L13.8 10.2 L24 12 L13.8 13.8 L12 24 L10.2 13.8 L0 12 L10.2 10.2 Z"/></svg>
         <small>ACC.</small>
       </div>
-      <div class="drop-pill">
-        <span class="drop-dot"></span>
-        <span id="pillText">Drop</span>
+      <div class="topbar-right">
+        <div class="drop-pill">
+          <span class="drop-dot"></span>
+          <span id="pillText">Drop</span>
+        </div>
+        <button class="burger" id="burgerBtn" aria-label="Abrir menú">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 7h16"/>
+            <path d="M4 12h16"/>
+            <path d="M4 17h16"/>
+          </svg>
+        </button>
       </div>
     </header>
+  </section>
+
+  <!-- LOOKS -->
+  <section class="view" data-view="looks">
+    <div class="panel">
+      <h1 class="panel-title">Looks</h1>
+      <p class="panel-sub">Piezas en escena. Modelos reales.</p>
+      <div class="looks-list" id="looksList"></div>
+    </div>
   </section>
 
   <!-- CATÁLOGO -->
@@ -677,37 +961,22 @@ body.kiosk .piece-hint{display:none}
     </div>
   </section>
 
-  <!-- CUENTA -->
-  <section class="view" data-view="cuenta">
-    <div class="panel">
-      <h1 class="panel-title">Cuenta</h1>
-      <p class="panel-sub">Acceso anticipado y piezas reservadas.</p>
-
-      <div class="install" id="installBox">
-        <p>Instalá CHONI y accedé antes que nadie a cada drop.</p>
-        <button id="installBtn">Instalar</button>
-      </div>
-
-      <div class="section-label">Actividad</div>
-      <div class="row"><span class="row-label">Piezas guardadas</span><span class="row-value" id="statSaved">0</span></div>
-      <div class="row"><span class="row-label">Reservas activas</span><span class="row-value" id="statReserved">0</span></div>
-      <div class="row"><span class="row-label">Lista de espera</span><span class="row-value" id="statWait">0</span></div>
-
-      <div class="section-label">Preferencias</div>
-      <div class="row"><span class="row-label">Interacción al tocar</span><button class="row-btn" id="modeBtn">Zoom</button></div>
-      <div class="row"><span class="row-label">Notificaciones de drop</span><button class="row-btn" data-toggle="notif">Activar</button></div>
-      <div class="row"><span class="row-label">Modo vidriera (kiosco)</span><button class="row-btn" data-toggle="kiosk">Activar</button></div>
-
-      <div class="section-label">Prototipo</div>
-      <div class="row"><span class="row-label">Reiniciar datos</span><button class="row-btn" id="resetBtn">Borrar</button></div>
-    </div>
-  </section>
-
   <!-- NAV (5 items) -->
   <nav class="nav">
     <button class="nav-btn is-active" data-go="vidriera">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 15l-5-5L5 20"/></svg>
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="16" rx="3"/>
+        <path d="M12 8.2 L13.1 11 L15.9 12 L13.1 13 L12 15.8 L10.9 13 L8.1 12 L10.9 11 Z" fill="currentColor" stroke="none"/>
+      </svg>
       Vidriera
+    </button>
+    <button class="nav-btn" data-go="looks">
+      <svg viewBox="0 0 24 24">
+        <circle cx="10" cy="9" r="3.2"/>
+        <path d="M3.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/>
+        <path d="M19 4 L19.7 6 L21.7 6.7 L19.7 7.4 L19 9.4 L18.3 7.4 L16.3 6.7 L18.3 6 Z" fill="currentColor" stroke="none"/>
+      </svg>
+      Looks
     </button>
     <button class="nav-btn" data-go="catalogo">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
@@ -722,12 +991,47 @@ body.kiosk .piece-hint{display:none}
       Guardados
       <span class="badge" id="navBadge">0</span>
     </button>
-    <button class="nav-btn" data-go="cuenta">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      Cuenta
-    </button>
   </nav>
 </div>
+
+<!-- DRAWER -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div>
+      <div class="drawer-title">Cuenta</div>
+      <div class="drawer-sub">Acceso anticipado y piezas reservadas.</div>
+    </div>
+    <button class="drawer-close" id="drawerClose" aria-label="Cerrar">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="install" id="installBox">
+      <p>Instalá CHONI y accedé antes que nadie a cada drop.</p>
+      <button id="installBtn">Instalar</button>
+    </div>
+
+    <div class="section-label">Actividad</div>
+    <div class="row"><span class="row-label">Piezas guardadas</span><span class="row-value" id="statSaved">0</span></div>
+    <div class="row"><span class="row-label">Reservas activas</span><span class="row-value" id="statReserved">0</span></div>
+    <div class="row"><span class="row-label">Lista de espera</span><span class="row-value" id="statWait">0</span></div>
+
+    <div class="section-label">Preferencias</div>
+    <div class="row"><span class="row-label">Notificaciones de drop</span><button class="row-btn" data-toggle="notif">Activar</button></div>
+    <div class="row"><span class="row-label">Modo vidriera (kiosco)</span><button class="row-btn" data-toggle="kiosk">Activar</button></div>
+
+    <div class="section-label">Prototipo</div>
+    <div class="row"><span class="row-label">Reiniciar datos</span><button class="row-btn" id="resetBtn">Borrar</button></div>
+
+    <div class="drawer-footer">
+      <p>
+        Hecho a mano por Belén
+        <svg class="heart" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </p>
+    </div>
+  </div>
+</aside>
 
 <!-- ZOOM MINI CARD -->
 <div class="zoom-card" id="zoomCard">
@@ -739,7 +1043,19 @@ body.kiosk .piece-hint{display:none}
   <button class="zoom-card-cta" id="zoomCta">Ver</button>
 </div>
 
-<!-- SHEET -->
+<!-- LOOK SHEET -->
+<div class="backdrop" id="lookBackdrop"></div>
+<div class="sheet" id="lookSheet">
+  <div class="sheet-grip"></div>
+  <div class="sheet-tag" id="lkTag">Look</div>
+  <h2 class="sheet-name" id="lkName">—</h2>
+  <p class="sheet-note" id="lkNote" style="margin-top:14px;"></p>
+  <div class="look-hero-img" id="lkHero"></div>
+  <div class="look-pieces-label">Piezas en escena</div>
+  <div class="look-pieces" id="lkPieces"></div>
+</div>
+
+<!-- SHEET (pieza) -->
 <div class="backdrop" id="backdrop"></div>
 <div class="sheet" id="sheet">
   <div class="sheet-grip"></div>
@@ -781,7 +1097,7 @@ const CATEGORIES = [
 ];
 
 /* ============================================================
-   PIEZAS — CHONI ACC.
+   PIEZAS
    ============================================================ */
 const PIECES = [
   {
@@ -795,7 +1111,7 @@ const PIECES = [
         note:'Cruz gótica en resina negra con pedrería plateada. Delicada de lejos, oscura de cerca. Para looks de noche.' }
     ]
   },
-   {
+  {
     id:'p2',
     collection:'Cápsula 02 — Osamenta',
     category:'hebillas',
@@ -869,7 +1185,47 @@ const PIECES = [
         unit:'Detalle',
         note:'Cada medalla está bañada en oro 18k. La Virgen Milagrosa es la pieza central de la cápsula Sacro.' }
     ]
+  }
+];
+
+/* ============================================================
+   LOOKS — fotos de modelos con accesorios
+   Reemplazá 'look-01.jpg', etc. por los nombres reales.
+   En 'pieces' van los IDs de las piezas que aparecen.
+   ============================================================ */
+const LOOKS = [
+  {
+    id:'l1', num:'01', capsule:'Sacro',
+    title:'Noche en la capilla',
+    note:'Camisa blanca abierta, medallas encima de la piel. Todo el día puesto, todo el año.',
+    image:'look-01.jpg',
+    layout:'hero',
+    pieces:['p7']
   },
+  {
+    id:'l2', num:'02', capsule:'Osamenta',
+    title:'Resaca de domingo',
+    note:'Pelo suelto, hebilla de hueso, nada más. Lo simple ya es un statement.',
+    image:'look-02.jpg',
+    layout:'editorial',
+    pieces:['p2', 'p1']
+  },
+  {
+    id:'l3', num:'03', capsule:'Y2K',
+    title:'Verano del 99',
+    note:'Aros grandes, remera negra. La vibra de una era que no vuelve pero se recuerda.',
+    image:'look-03.jpg',
+    layout:'hero',
+    pieces:['p4', 'p5']
+  },
+  {
+    id:'l4', num:'04', capsule:'Sacro',
+    title:'Plata bruta',
+    note:'Cadena gruesa, cruz martillada, capas sobre capas. Peso real, no baño.',
+    image:'look-04.jpg',
+    layout:'editorial',
+    pieces:['p3', 'p6']
+  }
 ];
 
 const DROPS = [
@@ -884,7 +1240,7 @@ const DROPS = [
 /* ============================================================
    ESTADO
    ============================================================ */
-const LS = { wish:'choni.wish', reserve:'choni.reserve', wait:'choni.wait', seen:'choni.seen', mode:'choni.mode' };
+const LS = { wish:'choni.wish', reserve:'choni.reserve', wait:'choni.wait', seen:'choni.seen' };
 const load = (k,f)=>{ try{ return JSON.parse(localStorage.getItem(k)) ?? f }catch{ return f } };
 const save = (k,v)=> localStorage.setItem(k, JSON.stringify(v));
 
@@ -892,7 +1248,6 @@ let wishlist = load(LS.wish, []);
 let reservas = load(LS.reserve, {});
 let waitlist = load(LS.wait, []);
 let seen     = load(LS.seen, []);
-let INTERACTION_MODE = localStorage.getItem(LS.mode) || 'zoom'; // 'zoom' | 'sheet'
 let currentCategory = 'all';
 
 const money = n => '$' + n.toLocaleString('es-AR');
@@ -942,7 +1297,6 @@ function zoomTo(piece, hotspot){
   const pieceEl = document.querySelector(`.piece[data-piece="${piece.id}"]`);
   if(!pieceEl) return;
 
-  // Limpiar zoom previo
   document.querySelectorAll('.piece.is-zoomed').forEach(p=>p.classList.remove('is-zoomed'));
   document.querySelectorAll('.hotspot.is-active').forEach(h=>h.classList.remove('is-active'));
 
@@ -952,7 +1306,6 @@ function zoomTo(piece, hotspot){
   const hsEl = pieceEl.querySelector(`.hotspot[data-hotspot="${hotspot.id}"]`);
   if(hsEl) hsEl.classList.add('is-active');
 
-  // Forzar reflow para que la transición aplique el nuevo origin
   void media.offsetWidth;
   pieceEl.classList.add('is-zoomed');
 
@@ -988,25 +1341,18 @@ feed.addEventListener('click', e => {
     const piece = PIECES.find(p=>p.id===hs.dataset.piece);
     const hotspot = piece.hotspots.find(h=>h.id===hs.dataset.hotspot);
 
-    // Marcar como visto
     if(!seen.includes(hotspot.id)){ seen.push(hotspot.id); save(LS.seen, seen); }
     hs.classList.add('is-seen');
 
-    // Si ya estaba zoomeado este mismo, des-zoom
     if(zoomed && zoomed.hotspotId === hotspot.id){
       unzoom();
       return;
     }
 
-    if(INTERACTION_MODE === 'zoom'){
-      zoomTo(piece, hotspot);
-    } else {
-      openSheet(piece, hotspot);
-    }
+    zoomTo(piece, hotspot);
     return;
   }
 
-  // Tap fuera de hotspot
   if(zoomed){ unzoom(); return; }
 
   const pieceEl = e.target.closest('.piece');
@@ -1021,14 +1367,12 @@ feed.addEventListener('click', e => {
   }
 });
 
-/* Al scrollear, salir del zoom */
 feed.addEventListener('scroll', ()=>{
   if(!zoomed) return;
   const inView = document.querySelector('.piece.is-inview');
   if(inView && inView.dataset.piece !== zoomed.pieceId) unzoom();
 }, {passive:true});
 
-/* CTA del mini card */
 document.getElementById('zoomCta').addEventListener('click', ()=>{
   if(!zoomed) return;
   openSheet(zoomed.piece, zoomed.hotspot);
@@ -1064,7 +1408,7 @@ function toggleWish(pid,hid,x,y){
 }
 
 /* ============================================================
-   SHEET
+   SHEET (pieza)
    ============================================================ */
 const backdrop = document.getElementById('backdrop');
 const sheet    = document.getElementById('sheet');
@@ -1215,6 +1559,123 @@ sheet.addEventListener('touchend', e=>{
 });
 
 /* ============================================================
+   LOOK SHEET
+   ============================================================ */
+const lookBackdrop = document.getElementById('lookBackdrop');
+const lookSheet    = document.getElementById('lookSheet');
+const lkTag   = document.getElementById('lkTag');
+const lkName  = document.getElementById('lkName');
+const lkNote  = document.getElementById('lkNote');
+const lkHero  = document.getElementById('lkHero');
+const lkPieces= document.getElementById('lkPieces');
+
+function openLook(look){
+  lkTag.textContent = `Look ${look.num} · ${look.capsule}`;
+  lkName.textContent = look.title;
+  lkNote.textContent = look.note;
+
+  // Hero image con fallback
+  lkHero.innerHTML = '';
+  lkHero.classList.remove('is-empty');
+  const img = new Image();
+  img.alt = look.title;
+  img.onload = ()=>{
+    lkHero.appendChild(img);
+  };
+  img.onerror = ()=>{
+    lkHero.classList.add('is-empty');
+  };
+  img.src = look.image;
+
+  // Piezas
+  lkPieces.innerHTML = look.pieces.map(pid=>{
+    const p = PIECES.find(x=>x.id===pid);
+    if(!p) return '';
+    const h = p.hotspots[0];
+    return `
+      <div class="look-piece" data-piece="${p.id}">
+        <img src="${p.image}" alt="${h.name}">
+        <div class="look-piece-info">
+          <h5>${h.name}</h5>
+          <p>${money(h.price)}</p>
+        </div>
+      </div>`;
+  }).join('');
+
+  lkPieces.querySelectorAll('.look-piece').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const piece = PIECES.find(x=>x.id===el.dataset.piece);
+      if(!piece) return;
+      closeLook();
+      setTimeout(()=> openSheet(piece, piece.hotspots[0]), 180);
+    });
+  });
+
+  lookBackdrop.classList.add('is-open');
+  lookSheet.classList.add('is-open');
+  buzz(8);
+}
+
+function closeLook(){
+  lookBackdrop.classList.remove('is-open');
+  lookSheet.classList.remove('is-open');
+}
+
+lookBackdrop.addEventListener('click', closeLook);
+
+let lookStartY = null;
+lookSheet.addEventListener('touchstart', e=>{ lookStartY = e.touches[0].clientY; }, {passive:true});
+lookSheet.addEventListener('touchmove', e=>{
+  if(lookStartY===null || lookSheet.scrollTop > 0) return;
+  const dy = e.touches[0].clientY - lookStartY;
+  if(dy > 0) lookSheet.style.transform = `translateY(${dy}px)`;
+}, {passive:true});
+lookSheet.addEventListener('touchend', e=>{
+  if(lookStartY===null) return;
+  const dy = (e.changedTouches[0].clientY - lookStartY);
+  lookSheet.style.transform = '';
+  if(dy > 90) closeLook();
+  lookStartY = null;
+});
+
+/* ============================================================
+   DRAWER
+   ============================================================ */
+const drawer = document.getElementById('drawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+const burgerBtn = document.getElementById('burgerBtn');
+
+function openDrawer(){
+  drawer.classList.add('is-open');
+  drawerBackdrop.classList.add('is-open');
+  renderCuenta();
+  buzz(8);
+}
+function closeDrawer(){
+  drawer.classList.remove('is-open');
+  drawerBackdrop.classList.remove('is-open');
+}
+burgerBtn.addEventListener('click', openDrawer);
+document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+drawerBackdrop.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDrawer(); });
+
+let drawerStartX = null;
+drawer.addEventListener('touchstart', e=>{ drawerStartX = e.touches[0].clientX; }, {passive:true});
+drawer.addEventListener('touchmove', e=>{
+  if(drawerStartX===null) return;
+  const dx = e.touches[0].clientX - drawerStartX;
+  if(dx > 0) drawer.style.transform = `translateX(${dx}px)`;
+}, {passive:true});
+drawer.addEventListener('touchend', e=>{
+  if(drawerStartX===null) return;
+  const dx = (e.changedTouches[0].clientX - drawerStartX);
+  drawer.style.transform = '';
+  if(dx > 80) closeDrawer();
+  drawerStartX = null;
+});
+
+/* ============================================================
    NAV
    ============================================================ */
 document.querySelectorAll('.nav-btn').forEach(b=>{
@@ -1228,9 +1689,56 @@ function go(view){
     b.classList.toggle('is-active', b.dataset.go === view));
   if(view==='wishlist') renderWishlist();
   if(view==='drops')    renderDrops();
-  if(view==='cuenta')   renderCuenta();
   if(view==='catalogo') renderCatalog();
+  if(view==='looks')    renderLooks();
   buzz(6);
+}
+
+/* ============================================================
+   LOOKS — render
+   ============================================================ */
+const looksList = document.getElementById('looksList');
+
+function renderLooks(){
+  if(!LOOKS.length){
+    looksList.innerHTML = `
+      <div class="empty">
+        ${SPARK_SVG}
+        <h3>Próximamente</h3>
+        <p>Estamos preparando los primeros looks.</p>
+      </div>`;
+    return;
+  }
+
+  looksList.innerHTML = LOOKS.map(l=>`
+    <article class="look look--${l.layout}" data-look="${l.id}">
+      <div class="look-media"></div>
+      <div class="look-num">${l.num}</div>
+      <div class="look-body">
+        <div class="look-tag">Look ${l.num} · ${l.capsule}</div>
+        <h3 class="look-title">${l.title}</h3>
+        <p class="look-note">${l.note}</p>
+        <span class="look-cta">Ver las piezas</span>
+      </div>
+    </article>
+  `).join('');
+
+  // Cargar imágenes con fallback
+  looksList.querySelectorAll('.look').forEach(el=>{
+    const look = LOOKS.find(x=>x.id===el.dataset.look);
+    const media = el.querySelector('.look-media');
+    const img = new Image();
+    img.alt = look.title;
+    img.onload = ()=>{
+      media.appendChild(img);
+    };
+    img.onerror = ()=>{
+      media.classList.add('is-empty');
+    };
+    img.src = look.image;
+
+    el.addEventListener('click', ()=> openLook(look));
+  });
 }
 
 /* ============================================================
@@ -1423,20 +1931,6 @@ setInterval(tickPill, 1000); tickPill();
 /* ============================================================
    CUENTA
    ============================================================ */
-const modeBtn = document.getElementById('modeBtn');
-function updateModeBtn(){
-  modeBtn.textContent = INTERACTION_MODE === 'zoom' ? 'Zoom' : 'Ficha';
-}
-updateModeBtn();
-
-modeBtn.addEventListener('click', ()=>{
-  INTERACTION_MODE = INTERACTION_MODE === 'zoom' ? 'sheet' : 'zoom';
-  localStorage.setItem(LS.mode, INTERACTION_MODE);
-  updateModeBtn();
-  if(zoomed) unzoom();
-  toast(INTERACTION_MODE === 'zoom' ? 'Modo zoom activado' : 'Modo ficha activado');
-});
-
 function renderCuenta(){
   document.getElementById('statSaved').textContent = wishlist.length;
   document.getElementById('statReserved').textContent =
@@ -1444,7 +1938,6 @@ function renderCuenta(){
   document.getElementById('statWait').textContent = waitlist.length;
 }
 
-/* Toggles */
 document.querySelectorAll('[data-toggle]').forEach(b=>{
   b.addEventListener('click', async ()=>{
     const tipo = b.dataset.toggle;
@@ -1460,6 +1953,7 @@ document.querySelectorAll('[data-toggle]').forEach(b=>{
       const on = document.body.classList.toggle('kiosk');
       b.textContent = on ? 'Desactivar' : 'Activar';
       toast(on ? 'Modo vidriera activo' : 'Modo vidriera off');
+      if(on) closeDrawer();
     }
   });
 });
@@ -1467,8 +1961,6 @@ document.querySelectorAll('[data-toggle]').forEach(b=>{
 document.getElementById('resetBtn').addEventListener('click', ()=>{
   Object.values(LS).forEach(k=>localStorage.removeItem(k));
   wishlist = []; reservas = {}; waitlist = []; seen = [];
-  INTERACTION_MODE = 'zoom';
-  updateModeBtn();
   toast('Datos borrados · recargá');
   syncUI(); renderCuenta();
 });
@@ -1537,6 +2029,7 @@ renderWishlist();
 renderDrops();
 renderCuenta();
 renderCatalog();
+renderLooks();
 </script>
 </body>
 </html>
