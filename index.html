@@ -1182,7 +1182,7 @@ body.feedback-mode .toast{cursor:default !important}
 }  
 </style>
 </head>
-<body>
+<body class="kiosk">
 
 <div id="app">
 
@@ -2276,7 +2276,13 @@ function renderCuenta(){
   document.getElementById('statWait').textContent = waitlist.length;
 }
 
-document.querySelectorAll('[data-toggle]').forEach(b=>{
+// Modo vidriera activo por defecto
+if(document.body.classList.contains('kiosk')){
+  const kioskBtn = document.querySelector('[data-toggle="kiosk"]');
+  if(kioskBtn) kioskBtn.textContent = 'Desactivar';
+}
+  
+  document.querySelectorAll('[data-toggle]').forEach(b=>{
   b.addEventListener('click', async ()=>{
     const tipo = b.dataset.toggle;
     if(tipo === 'notif'){
