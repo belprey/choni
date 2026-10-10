@@ -1365,6 +1365,57 @@ body.feedback-mode .toast{cursor:default !important}
   </div>
 </div>
 
+<!-- FEEDBACK -->
+<button class="fb-launcher" id="fbLauncher" aria-label="Modo feedback">
+  <svg viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="7"/>
+    <path d="M21 21l-4.35-4.35"/>
+  </svg>
+</button>
+
+<div class="fb-banner" id="fbBanner">
+  <span>Tocá lo que quieras cambiar</span>
+  <button class="fb-banner-see" id="fbBannerSee">Ver cambios <b id="fbBannerCount">0</b></button>
+  <button class="fb-banner-close" id="fbBannerClose" aria-label="Salir">×</button>
+</div>
+
+<div class="fb-modal" id="fbModal">
+  <div class="fb-modal-inner">
+    <div class="fb-modal-tag">Feedback</div>
+    <h3 class="fb-modal-title">¿Qué querés cambiar acá?</h3>
+    <div class="fb-modal-preview" id="fbPreview"></div>
+    <div class="fb-tabs">
+      <button class="fb-tab is-active" data-tab="comment">Comentario</button>
+      <button class="fb-tab" data-tab="edit" id="fbTabEdit">Editar texto</button>
+    </div>
+    <div class="fb-pane" data-pane="comment">
+      <textarea id="fbComment" placeholder="Ej: Cambiaría este texto por uno más corto..."></textarea>
+    </div>
+    <div class="fb-pane" data-pane="edit" style="display:none">
+      <textarea id="fbEdit" placeholder="Escribí acá el texto nuevo"></textarea>
+    </div>
+    <div class="fb-actions">
+      <button class="fb-btn-cancel" id="fbCancel">Cancelar</button>
+      <button class="fb-btn-save" id="fbSave">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="fb-panel" id="fbPanel">
+  <div class="fb-panel-head">
+    <div>
+      <div class="fb-panel-title">Cambios</div>
+      <div class="fb-panel-sub" id="fbPanelSub">0 sugerencias</div>
+    </div>
+    <button class="fb-panel-close" id="fbPanelClose" aria-label="Cerrar">×</button>
+  </div>
+  <div class="fb-panel-body" id="fbPanelBody"></div>
+  <div class="fb-panel-actions">
+    <button class="fb-panel-clear" id="fbClear">Borrar todo</button>
+    <button class="fb-panel-export" id="fbExport">Exportar JSON</button>
+  </div>
+</div>
+  
 <div class="toast" id="toast"></div>
 
 <script>
