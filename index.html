@@ -378,27 +378,62 @@ body.kiosk .piece-hint{display:none}
   border-top:1px solid var(--line-soft);
   text-align:center;
 }
-.drawer-footer p{
+
+/* Firma personal Belén */
+.drawer-byline{
   font-family:var(--serif);
   font-style:italic;
-  font-size:13.5px;
-  color:rgba(237,228,211,.55);
+  font-size:13px;
+  color:rgba(237,228,211,.5);
   letter-spacing:.02em;
   display:inline-flex;
   align-items:center;
   gap:8px;
+  margin-bottom:16px;
 }
-.drawer-footer .heart{
-  width:12px;height:12px;
-  fill:var(--gold);
-  filter:drop-shadow(0 0 6px rgba(212,175,55,.6));
+.drawer-byline .heart{
+  width:11px;height:11px;
+  fill:rgba(201,162,39,.7);
   animation:heartPulse 2.4s var(--ease) infinite;
   transform-origin:center;
 }
 @keyframes heartPulse{
-  0%,100%{transform:scale(1);opacity:.9}
-  50%{transform:scale(1.18);opacity:1}
+  0%,100%{transform:scale(1);opacity:.85}
+  50%{transform:scale(1.15);opacity:1}
 }
+
+/* Crédito editorial CompanIn */
+.drawer-credit{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+}
+.credit-line{
+  width:40px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,162,39,.42));
+}
+.credit-line:last-child{
+  background:linear-gradient(90deg,rgba(201,162,39,.42),transparent);
+}
+.credit-text{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:11px;
+  letter-spacing:1.8px;
+  text-transform:uppercase;
+  color:rgba(201,162,39,.6);
+  white-space:nowrap;
+}
+.credit-text b{
+  font-weight:500;
+  font-style:normal;
+  font-family:var(--engrave);
+  letter-spacing:2px;
+  color:rgba(201,162,39,.85);
+}
+
 
 /* ---------- LOOKS (editorial) ---------- */
 .looks-list{display:flex;flex-direction:column;gap:26px}
@@ -1310,14 +1345,26 @@ body.feedback-mode .toast{cursor:default !important}
     <div class="row"><span class="row-label">Reiniciar datos</span><button class="row-btn" id="resetBtn">Borrar</button></div>
 
     <div class="drawer-footer">
-      <p>
+      <p class="drawer-byline">
         Hecho a mano por Belén
         <svg class="heart" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
       </p>
+
+      <div class="drawer-credit">
+        <span class="credit-line"></span>
+        <span class="credit-text">
+  <svg viewBox="0 0 24 24" style="width:8px;height:8px;fill:rgba(201,162,39,.7);vertical-align:-1px;margin-right:6px">
+    <path d="M12 0 L13.8 10.2 L24 12 L13.8 13.8 L12 24 L10.2 13.8 L0 12 L10.2 10.2 Z"/>
+  </svg>
+  Un producto de <b>CompanIn</b>
+  <svg viewBox="0 0 24 24" style="width:8px;height:8px;fill:rgba(201,162,39,.7);vertical-align:-1px;margin-left:6px">
+    <path d="M12 0 L13.8 10.2 L24 12 L13.8 13.8 L12 24 L10.2 13.8 L0 12 L10.2 10.2 Z"/>
+  </svg>
+</span>
+      </div>
     </div>
-  </div>
 </aside>
 
 <!-- ZOOM MINI CARD -->
