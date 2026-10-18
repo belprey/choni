@@ -53,17 +53,26 @@ img{display:block;max-width:100%}
 }
 .topbar > *{pointer-events:auto}
 .brand{
+  display:flex;align-items:baseline;gap:6px;
+  font-family:var(--engrave);font-weight:600;
+  font-size:22px;letter-spacing:.32em;
+  background:linear-gradient(180deg,#FFF6D4 0%,var(--gold-lt) 25%,var(--gold) 55%,var(--gold-dk) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(255,246,212,.25)) drop-shadow(0 0 14px rgba(212,175,55,.45));
   position:relative;
-  display:flex;
-  align-items:center;
 }
-.brand-logo{
-  height:48px; /* Ajustá este número si lo querés más grande o chico */
-  width:auto;
-  /* El truco mágico: esto hace que el fondo blanco de la foto desaparezca */
-  mix-blend-mode: screen; 
-  /* Le damos un brillo suave para que resalte sobre las fotos */
-  filter: drop-shadow(0 0 10px rgba(212,175,55,.3));
+.brand .spark{
+  width:12px;height:12px;
+  margin-left:-2px;transform:translateY(2px);
+  fill:var(--gold-lt);
+  filter:drop-shadow(0 0 5px rgba(245,228,168,.8));
+}
+.brand small{
+  font-family:var(--engrave);font-size:9.5px;letter-spacing:.3em;
+  color:var(--gold);opacity:.8;
+  transform:translateY(-5px);
+  -webkit-text-fill-color:var(--gold);
 }
 .topbar-right{
   display:flex;align-items:center;gap:10px;
@@ -367,35 +376,29 @@ body.kiosk .piece-hint{display:none}
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:11px;
+  gap:6px; 
 }
-.credit-line{
-  width:34px;
-  height:1px;
-  background:linear-gradient(90deg,transparent,rgba(201,162,39,.4));
-}
-.credit-line:last-child{
-  background:linear-gradient(90deg,rgba(201,162,39,.4),transparent);
-}
+
 .credit-star{
-  width:9px;
-  height:9px;
-  fill:rgba(201,162,39,.75);
-  filter:drop-shadow(0 0 4px rgba(201,162,39,.4));
+  width:7px; 
+  height:7px;
+  fill:rgba(201,162,39,.4); 
   flex-shrink:0;
 }
+
 .credit-text{
   font-family:var(--serif);
   font-style:italic;
-  font-size:12.5px;
-  letter-spacing:.03em;
-  color:rgba(201,162,39,.62);
+  font-size:10px; 
+  letter-spacing:.05em;
+  color:rgba(201,162,39,.4); 
   white-space:nowrap;
 }
+
 .credit-text b{
   font-weight:500;
   font-style:italic;
-  color:rgba(201,162,39,.9);
+  color:rgba(201,162,39,.7); 
 }
 
 /* ---------- LOOKS (editorial) ---------- */
@@ -1186,8 +1189,12 @@ body.feedback-mode .toast{cursor:default !important}
 
   <!-- VIDRIERA -->
   <section class="view is-active" data-view="vidriera">
+    <div class="feed" id="feed"></div>
+    <header class="topbar">
       <div class="brand">
-        <img src="logo-choni.png" alt="CHONI ACC." class="brand-logo">
+        CHONI
+        <svg class="spark" viewBox="0 0 24 24"><path d="M12 0 L13.8 10.2 L24 12 L13.8 13.8 L12 24 L10.2 13.8 L0 12 L10.2 10.2 Z"/></svg>
+        <small>ACC.</small>
       </div>
       <div class="topbar-right">
         <div class="drop-pill">
@@ -1305,18 +1312,17 @@ body.feedback-mode .toast{cursor:default !important}
 
         <div class="drawer-footer">
       <div class="drawer-credit">
-        <span class="credit-line"></span>
         <svg class="credit-star" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 0 L13.8 10.2 L24 12 L13.8 13.8 L12 24 L10.2 13.8 L0 12 L10.2 10.2 Z"/>
         </svg>
-        <span class="credit-text">Hecho a mano por <b>CompanIn</b></span>
+        <span class="credit-text">por <b>CompanIn</b></span>
         <svg class="credit-star" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 0 L13.8 10.2 L24 12 L13.8 13.8 L12 24 L10.2 13.8 L0 12 L10.2 10.2 Z"/>
         </svg>
-        <span class="credit-line"></span>
       </div>
     </div>
-    </aside>
+  </div>
+</aside>
 
 <!-- ZOOM MINI CARD -->
 <div class="zoom-card" id="zoomCard">
@@ -1526,8 +1532,6 @@ const PIECES = [
 
 /* ============================================================
    LOOKS — fotos de modelos con accesorios
-   Reemplazá 'look-01.jpg', etc. por los nombres reales.
-   En 'pieces' van los IDs de las piezas que aparecen.
    ============================================================ */
 const LOOKS = [
   {
