@@ -53,26 +53,17 @@ img{display:block;max-width:100%}
 }
 .topbar > *{pointer-events:auto}
 .brand{
-  display:flex;align-items:baseline;gap:6px;
-  font-family:var(--engrave);font-weight:600;
-  font-size:22px;letter-spacing:.32em;
-  background:linear-gradient(180deg,#FFF6D4 0%,var(--gold-lt) 25%,var(--gold) 55%,var(--gold-dk) 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  filter:drop-shadow(0 1px 0 rgba(255,246,212,.25)) drop-shadow(0 0 14px rgba(212,175,55,.45));
   position:relative;
+  display:flex;
+  align-items:center;
 }
-.brand .spark{
-  width:12px;height:12px;
-  margin-left:-2px;transform:translateY(2px);
-  fill:var(--gold-lt);
-  filter:drop-shadow(0 0 5px rgba(245,228,168,.8));
-}
-.brand small{
-  font-family:var(--engrave);font-size:9.5px;letter-spacing:.3em;
-  color:var(--gold);opacity:.8;
-  transform:translateY(-5px);
-  -webkit-text-fill-color:var(--gold);
+.brand-logo{
+  height:48px; /* Ajustá este número si lo querés más grande o chico */
+  width:auto;
+  /* El truco mágico: esto hace que el fondo blanco de la foto desaparezca */
+  mix-blend-mode: screen; 
+  /* Le damos un brillo suave para que resalte sobre las fotos */
+  filter: drop-shadow(0 0 10px rgba(212,175,55,.3));
 }
 .topbar-right{
   display:flex;align-items:center;gap:10px;
@@ -1195,12 +1186,8 @@ body.feedback-mode .toast{cursor:default !important}
 
   <!-- VIDRIERA -->
   <section class="view is-active" data-view="vidriera">
-    <div class="feed" id="feed"></div>
-    <header class="topbar">
       <div class="brand">
-        CHONI
-        <svg class="spark" viewBox="0 0 24 24"><path d="M12 0 L13.8 10.2 L24 12 L13.8 13.8 L12 24 L10.2 13.8 L0 12 L10.2 10.2 Z"/></svg>
-        <small>ACC.</small>
+        <img src="logo-choni.png" alt="CHONI ACC." class="brand-logo">
       </div>
       <div class="topbar-right">
         <div class="drop-pill">
